@@ -14,6 +14,7 @@ describe "Zymurgy" do
     @brewery.stub!('kettle_tax_litres').and_return(2)
   end
 
+  # TODO: Need to add 'bigness factor' here. It is brew specific.
   describe "Brew" do
     describe "instantiating a Brew" do
       it "should reveal the Original Gravity, Fermentation Volume and Boil Time; but not Brewery it was instantiated with" do

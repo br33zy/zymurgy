@@ -2,7 +2,7 @@ $LOAD_PATH << File.dirname(__FILE__)
 
 module Zymurgy
 
-  autoload :Hop, "zymurgy/hop"
+  autoload :HopAddition, "zymurgy/hop_addition"
   autoload :Brewery, "zymurgy/brewery"
   autoload :Brew, "zymurgy/brew"
 
