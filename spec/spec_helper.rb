@@ -5,6 +5,8 @@ require 'zymurgy'
 require 'spec'
 require 'spec/autorun'
 
+require 'spec/expectations'
+
 Spec::Runner.configure do |config|
   
 end
