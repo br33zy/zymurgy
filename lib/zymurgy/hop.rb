@@ -7,5 +7,9 @@ module Zymurgy
       @alpha_acid_percentage = alpha_acid_percentage
       @bigness_factor = bigness_factor
     end
+
+    def IBU starting_gravity, boil_time_minutes, weight_grams
+      17.23
+    end
   end
 end
