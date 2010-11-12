@@ -1,6 +1,11 @@
 = zymurgy
 
-Description goes here.
+(n) The branch of chemistry that deals with fermentation processes, as in brewing.
+
+Zymurgy is a collection of libraries to help with beer brewing calculations:
+        * Gravity points
+        * Hop utilisation
+        * Boil times and volumes
 
 == Note on Patches/Pull Requests
  

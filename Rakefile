@@ -5,9 +5,14 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "zymurgy"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
-    gem.email = "mike.breeze@rea-group.com"
+    gem.summary = %Q{A beer brewing gem}
+    gem.description = %Q{(n) The branch of chemistry that deals with fermentation processes, as in brewing.
+
+Zymurgy is a collection of libraries to help with beer brewing calculations:
+        * Gravity points
+        * Hop utilisation
+        * Boil times and volumes}
+    gem.email = "breezy@binningup.com"
     gem.homepage = "http://github.com/breezy/zymurgy"
     gem.authors = ["Mike Breeze"]
     gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
