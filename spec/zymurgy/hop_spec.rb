@@ -4,7 +4,8 @@ describe "Zymurgy" do
   describe "Hop" do
     before do
       alpha_acid_percentage = 10
-      @hop = Zymurgy::Hop.new(alpha_acid_percentage)
+      bigness_factor = 2
+      @hop = Zymurgy::Hop.new(alpha_acid_percentage, bigness_factor)
     end
 
     describe "attributes and accessors" do
