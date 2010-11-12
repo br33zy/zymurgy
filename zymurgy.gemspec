@@ -30,7 +30,8 @@ Zymurgy is a collection of libraries to help with beer brewing calculations:
      "VERSION",
      "lib/zymurgy.rb",
      "test/helper.rb",
-     "test/test_zymurgy.rb"
+     "test/test_zymurgy.rb",
+     "zymurgy.gemspec"
   ]
   s.homepage = %q{http://github.com/breezy/zymurgy}
   s.rdoc_options = ["--charset=UTF-8"]
