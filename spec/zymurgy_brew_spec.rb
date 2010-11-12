@@ -12,7 +12,6 @@ describe "Zymurgy" do
   before do
     @brewery = mock('A Brewery')
     @brewery.stub!('kettle_tax_litres').and_return(2)
-
   end
 
   describe "Brew" do
@@ -28,19 +27,14 @@ describe "Zymurgy" do
       end
     end
 
-    describe "calculating Post Boil volume" do
-#      before do
-#        alpha_acid_percentage = 7
-#        bigness_factor = 1.65
-#        @hop = Zymurgy::Hop.new(alpha_acid_percentage, bigness_factor)
-#      end
-#
-#      it "should calculate International Bitterness Units for the Hop as a function of the brew's starting gravity, boil time in minutes, and the weight in grams of hops" do
-#        starting_gravity = 1045
-#        boil_time_minutes = 45
-#        weight_grams = 30
-#        @hop.IBU(starting_gravity, boil_time_minutes, weight_grams).should == 17.23
-#      end
+    describe "performing brew calculations" do
+      it "should calculate the post boil volume" do
+        original_gravity = 1045
+        fermentation_volume_litres = 25
+        boil_time_minutes = 60
+        brew = Zymurgy::Brew.new(@brewery, original_gravity, fermentation_volume_litres, boil_time_minutes)
+        brew.post_boil_volume_litres.should == 23
+      end
     end
   end
 end
