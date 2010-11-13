@@ -14,7 +14,6 @@ describe "Zymurgy" do
     @brew = mock('A Brew')
   end
 
-  # TODO: Actually perform hop bitterness calc. May have to pass in Brewery....
   describe "HopAddition" do
     describe "instantiating a Hop Addition object" do
       it "should reveal the alpha acid level, weight added, and boil time; but not Brew it was instantiated with" do
@@ -36,6 +35,11 @@ describe "Zymurgy" do
         @hop_addition = Zymurgy::HopAddition.new(@brew, alpha_acid_percentage, weight_grams, boil_time_minutes)
       end
 
+      # mg/l AA        => ((AA/100) * weight_grams * 1000) / post_boil_volume
+      # time           => (1 - EXP((-0.04 * boil_time_minutes))) / 4.15
+      # bigness factor => 1.65*(0.000125^((original_gravity/1000)-1))
+
+      # mg/l AA   *    time      *      bigness factor
       it "should calculate International Bitterness Units for the Hop Addition" do
         @hop_addition.IBU().should == 17.23
       end

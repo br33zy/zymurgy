@@ -6,6 +6,7 @@ require 'spec'
 require 'spec/autorun'
 
 require 'spec/expectations'
+require 'patches/float'
 
 Spec::Runner.configure do |config|
   

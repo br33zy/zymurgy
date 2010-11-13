@@ -13,6 +13,12 @@ module Zymurgy
     def post_boil_volume_litres
       @fermentation_volume_litres - @brewery.kettle_tax_litres
     end
+
+    # bigness factor => 1.65*(0.000125^((original_gravity/1000)-1))
+    # round to 2dp
+    def bigness_factor
+      return 1.65 * 0.000125**(@original_gravity/1000.0 - 1.0)
+    end
   end
 end
 
