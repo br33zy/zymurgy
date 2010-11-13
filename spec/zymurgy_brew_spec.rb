@@ -35,7 +35,7 @@ describe "Zymurgy" do
         @brew = Zymurgy::Brew.new(@brewery, original_gravity, fermentation_volume_litres, boil_time_minutes)
       end
       it "should calculate the post boil volume" do
-        @brew.post_boil_volume_litres.should == 23
+        @brew.post_boil_volume_litres.should == 27
       end
 
       it "should calculate the bigness factor used for hop utilisation calculations" do

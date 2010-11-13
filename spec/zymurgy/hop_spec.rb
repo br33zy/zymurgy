@@ -4,6 +4,9 @@ describe "Zymurgy" do
   describe "Hop" do
     before do
       @brew = mock('A Brew')
+      @brew.stub!('bigness_factor').and_return(1.1)
+      @brew.stub!('post_boil_volume').and_return(27)
+      @brew.stub!('boil_time_minutes').and_return(45)
       alpha_acid_percentage = 7
       weight_grams = 30
       boil_time_minutes = 45

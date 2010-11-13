@@ -12,6 +12,9 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe "Zymurgy" do
   before do
     @brew = mock('A Brew')
+    @brew.stub!('bigness_factor').and_return(1.1)
+    @brew.stub!('post_boil_volume').and_return(27)
+    @brew.stub!('boil_time_minutes').and_return(45)
   end
 
   describe "HopAddition" do
@@ -37,11 +40,9 @@ describe "Zymurgy" do
 
       # mg/l AA        => ((AA/100) * weight_grams * 1000) / post_boil_volume
       # time           => (1 - EXP((-0.04 * boil_time_minutes))) / 4.15
-      # bigness factor => 1.65*(0.000125^((original_gravity/1000)-1))
-
-      # mg/l AA   *    time      *      bigness factor
+      # IBU = mg/l AA   *    time      *      bigness factor
       it "should calculate International Bitterness Units for the Hop Addition" do
-        @hop_addition.IBU().should == 17.23
+        @hop_addition.IBU().round_dp(2).should == 17.21
       end
     end
   end
