@@ -9,5 +9,6 @@ require 'spec/expectations'
 require 'patches/float'
 
 Spec::Runner.configure do |config|
-  
+  config.include Zymurgy::Utils
+
 end
