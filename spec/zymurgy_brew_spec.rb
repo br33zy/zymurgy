@@ -18,28 +18,28 @@ describe "Zymurgy" do
 
     @params = {
         'original_gravity' => 1045,
+        'final_gravity' => 1012,
         'fermentation_volume_litres' => 25,
         'boil_time_minutes' => 60
     }
   end
 
-  # TODO: Move to accessors rather than just readers. Should be able to instantiate an empty brew.
-  # TODO: Add Final Gravity attribute
   describe "Brew" do
     describe "instantiating a Brew" do
       it "should provide readers for the Brewery and parameters it is instantiated with" do
         brew = Zymurgy::Brew.new(@brewery, @params)
         brew.brewery.kettle_tax_litres.should == 2
         brew.original_gravity.should == 1045
-        brew.original_gravity=(1000).should == 1000
+        brew.final_gravity.should == 1012
         brew.fermentation_volume_litres.should == 25
         brew.boil_time_minutes.should == 60
       end
 
-      it "should provide writers for the parameters it is instantiated with" do
+      it "should provide writers for the parameters it is instantiated with, but not the Brewery" do
         brew = Zymurgy::Brew.new(@brewery, @params)
         brew.should_not respond_to(:brewery=)
         brew.should respond_to(:original_gravity=)
+        brew.should respond_to(:final_gravity=)
         brew.should respond_to(:fermentation_volume_litres=)
         brew.should respond_to(:boil_time_minutes=)
       end
@@ -48,12 +48,12 @@ describe "Zymurgy" do
         lambda {Zymurgy::Brew.new('not a brewery', @params)}.should raise_error()
       end
 
-      it "should accept an empty set of parameters as long as a valid Zymurgy::Brewery object is provided" do
+      it "should set default values when parameters aren't provided" do
         brew = Zymurgy::Brew.new(@brewery, {})
-        brew.brewery.kettle_tax_litres.should == 2
-        brew.original_gravity.should == nil
-        brew.fermentation_volume_litres.should == nil
-        brew.boil_time_minutes.should == nil
+        brew.original_gravity.should == 1043
+        brew.final_gravity.should == 1008
+        brew.fermentation_volume_litres.should == 19
+        brew.boil_time_minutes.should == 60
       end
     end
 
@@ -61,6 +61,7 @@ describe "Zymurgy" do
       before do
         params = {
             'original_gravity' => 1045,
+            'final_gravity' => 1012,
             'fermentation_volume_litres' => 25,
             'boil_time_minutes' => 60
         }
@@ -83,6 +84,10 @@ describe "Zymurgy" do
       # Mash In volume = Mash Out volume + (volume_lost_to_mash_litres_per_kg * weight of total grain bill)
       it "should calculate the Mash In volume given the weight of the total grain bill" do
         @brew.mash_in_volume_litres(6.52).round_dp(2).should == 43.35
+      end
+
+      it "should calculate the Alcohol By Volume percentage for the completed brew" do
+        @brew.alcohol_by_volume.round_dp(2).should == 5.05
       end
     end
   end
