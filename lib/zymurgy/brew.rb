@@ -1,13 +1,15 @@
 module Zymurgy
   class Brew
 
-    attr_reader :original_gravity, :fermentation_volume_litres, :boil_time_minutes
+    attr_reader :brewery, :original_gravity, :fermentation_volume_litres, :boil_time_minutes
+    attr_writer :original_gravity, :fermentation_volume_litres, :boil_time_minutes
 
-    def initialize brewery, original_gravity, fermentation_volume_litres, boil_time_minutes
+    def initialize brewery, params
+      raise ArgumentError unless (brewery.class == 'Zymurgy::Brewery')
       @brewery                      = brewery
-      @original_gravity             = original_gravity
-      @fermentation_volume_litres   = fermentation_volume_litres
-      @boil_time_minutes            = boil_time_minutes         
+      @original_gravity             = params['original_gravity']
+      @fermentation_volume_litres   = params['fermentation_volume_litres']
+      @boil_time_minutes            = params['boil_time_minutes']
     end
 
     # Mashout volume = Post Boil Volume + (Boil Time Minutes / 60) * evaporation_rate_litres_per_hour
