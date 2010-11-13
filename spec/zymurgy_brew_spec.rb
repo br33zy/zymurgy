@@ -16,6 +16,8 @@ describe "Zymurgy" do
     @brewery.stub!('volume_lost_to_mash_litres_per_kg').and_return(0.82)
   end
 
+  # TODO: Move to accessors rather than just readers. Should be able to instantiate an empty brew.
+  # TODO: Add Final Gravity attribute
   describe "Brew" do
     describe "instantiating a Brew" do
       it "should reveal the Original Gravity, Fermentation Volume and Boil Time; but not Brewery it was instantiated with" do

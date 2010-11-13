@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{zymurgy}
-  s.version = "0.2.0"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Mike Breeze"]
@@ -32,12 +32,14 @@ Zymurgy is a collection of libraries to help with beer brewing calculations:
      "lib/zymurgy/brew.rb",
      "lib/zymurgy/brewery.rb",
      "lib/zymurgy/hop_addition.rb",
+     "lib/zymurgy/utils.rb",
      "spec/patches/float.rb",
      "spec/spec_helper.rb",
      "spec/zymurgy/hop_spec.rb",
      "spec/zymurgy_brew_spec.rb",
      "spec/zymurgy_brewery_spec.rb",
      "spec/zymurgy_hop_addition_spec.rb",
+     "spec/zymurgy_utils_spec.rb",
      "zymurgy.gemspec"
   ]
   s.homepage = %q{http://github.com/breezy/zymurgy}
@@ -51,7 +53,8 @@ Zymurgy is a collection of libraries to help with beer brewing calculations:
      "spec/zymurgy/hop_spec.rb",
      "spec/zymurgy_brew_spec.rb",
      "spec/zymurgy_brewery_spec.rb",
-     "spec/zymurgy_hop_addition_spec.rb"
+     "spec/zymurgy_hop_addition_spec.rb",
+     "spec/zymurgy_utils_spec.rb"
   ]
 
   if s.respond_to? :specification_version then
