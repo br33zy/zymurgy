@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{zymurgy}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Mike Breeze"]
-  s.date = %q{2010-11-12}
+  s.date = %q{2010-11-13}
   s.description = %q{(n) The branch of chemistry that deals with fermentation processes, as in brewing.
 
 Zymurgy is a collection of libraries to help with beer brewing calculations:
@@ -29,8 +29,15 @@ Zymurgy is a collection of libraries to help with beer brewing calculations:
      "Rakefile",
      "VERSION",
      "lib/zymurgy.rb",
-     "test/helper.rb",
-     "test/test_zymurgy.rb",
+     "lib/zymurgy/brew.rb",
+     "lib/zymurgy/brewery.rb",
+     "lib/zymurgy/hop_addition.rb",
+     "spec/patches/float.rb",
+     "spec/spec_helper.rb",
+     "spec/zymurgy/hop_spec.rb",
+     "spec/zymurgy_brew_spec.rb",
+     "spec/zymurgy_brewery_spec.rb",
+     "spec/zymurgy_hop_addition_spec.rb",
      "zymurgy.gemspec"
   ]
   s.homepage = %q{http://github.com/breezy/zymurgy}
@@ -39,8 +46,12 @@ Zymurgy is a collection of libraries to help with beer brewing calculations:
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{A beer brewing gem}
   s.test_files = [
-    "test/helper.rb",
-     "test/test_zymurgy.rb"
+    "spec/patches/float.rb",
+     "spec/spec_helper.rb",
+     "spec/zymurgy/hop_spec.rb",
+     "spec/zymurgy_brew_spec.rb",
+     "spec/zymurgy_brewery_spec.rb",
+     "spec/zymurgy_hop_addition_spec.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -48,12 +59,12 @@ Zymurgy is a collection of libraries to help with beer brewing calculations:
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<thoughtbot-shoulda>, [">= 0"])
+      s.add_development_dependency(%q<rspec>, [">= 1.2.8"])
     else
-      s.add_dependency(%q<thoughtbot-shoulda>, [">= 0"])
+      s.add_dependency(%q<rspec>, [">= 1.2.8"])
     end
   else
-    s.add_dependency(%q<thoughtbot-shoulda>, [">= 0"])
+    s.add_dependency(%q<rspec>, [">= 1.2.8"])
   end
 end
 
