@@ -19,7 +19,10 @@ module Zymurgy
     end
 
     def volume_gravity_points volume_litres
-      (@points_per_kg_per_litre / volume_litres) * @weight_in_kg * @brew.brewery.efficiency_percentage / 100      
+      maximum_volume_gravity_points = (@points_per_kg_per_litre / volume_litres) * @weight_in_kg
+      
+      return maximum_volume_gravity_points unless @mash
+      return maximum_volume_gravity_points * @brew.brewery.efficiency_percentage / 100
     end
 
     def post_boil_volume_gravity_points

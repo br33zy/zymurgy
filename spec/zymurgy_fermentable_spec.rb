@@ -36,7 +36,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe "Zymurgy" do
   before do
     @brewery = mock('A Brewery')
-    @brewery.stub!('efficiency_percentage').and_return(61)    
+    @brewery.stub!('efficiency_percentage').and_return(61)
     @brew = mock('A Brew Recipe')
     @brew.stub!('class').and_return('Zymurgy::Brew')
     @brew.stub!('brewery').and_return(@brewery)
@@ -49,7 +49,7 @@ describe "Zymurgy" do
         'mash' => true,
         'points_per_kg_per_litre' => 300.0,
         'weight_in_kg' => 5.24,
-    }
+        }
   end
   describe "Fermentable" do
     describe "instantiating a Brew" do
@@ -70,7 +70,7 @@ describe "Zymurgy" do
       end
 
       it "should complain if not provided with a valid Zymurgy::Brew object" do
-        lambda {Zymurgy::Fermentable.new('a coffee', @params)}.should raise_error()
+        lambda { Zymurgy::Fermentable.new('a coffee', @params) }.should raise_error()
       end
 
       it "should set default values when parameters aren't provided" do
@@ -81,22 +81,49 @@ describe "Zymurgy" do
       end
     end
 
-    # TODO: Only include efficiency when mash == true.
     describe "Performing fermentable calculations" do
-      it "should calculate the gravity points contributed towards the post boil volume" do
-        fermentable = Zymurgy::Fermentable.new(@brew, @params)
-        fermentable.post_boil_volume_gravity_points.round_dp(2).should == 35.52
+      describe "for mashed fermentables, thus factoring in brewery mash efficiency" do
+        it "should calculate the gravity points contributed towards the post boil volume" do
+          fermentable = Zymurgy::Fermentable.new(@brew, @params)
+          fermentable.post_boil_volume_gravity_points.round_dp(2).should == 35.52
+        end
+
+        it "should calculate the gravity points contributed towards the mash out/pre boil volume" do
+          fermentable = Zymurgy::Fermentable.new(@brew, @params)
+          fermentable.pre_boil_volume_gravity_points.round_dp(2).should == 25.23
+        end
+
+        it "should calculate the gravity points contributed towards a given volume" do
+          fermentable = Zymurgy::Fermentable.new(@brew, @params)
+          fermentable.volume_gravity_points(38).round_dp(2).should == 25.23
+        end
       end
 
-      it "should calculate the gravity points contributed towards the mash out/pre boil volume" do
-        fermentable = Zymurgy::Fermentable.new(@brew, @params)
-        fermentable.pre_boil_volume_gravity_points.round_dp(2).should == 25.23
+      describe "for fermentables (such as cans of goop) which aren't mashed, thus ignoring brewery mash efficiency" do
+        before do
+          @unmashed_params = {
+              'mash' => false,
+              'points_per_kg_per_litre' => 300.0,
+              'weight_in_kg' => 1.7
+          }
+        end
+        it "should calculate the gravity points contributed towards the post boil volume" do
+          fermentable = Zymurgy::Fermentable.new(@brew, @unmashed_params)
+          fermentable.post_boil_volume_gravity_points.round_dp(2).should == 18.89
+        end
+
+        it "should calculate the gravity points contributed towards the pre boil volume" do
+          fermentable = Zymurgy::Fermentable.new(@brew, @unmashed_params)
+          fermentable.pre_boil_volume_gravity_points.round_dp(2).should == 13.42
+        end
+
+        it "should calculate the gravity points contributed towards a given volume" do
+          fermentable = Zymurgy::Fermentable.new(@brew, @unmashed_params)
+          fermentable.volume_gravity_points(25).round_dp(2).should == 20.40
+        end
       end
 
-      it "should calculate the gravity points contributed towards a given volume" do
-        fermentable = Zymurgy::Fermentable.new(@brew, @params)
-        fermentable.volume_gravity_points(38).round_dp(2).should == 25.23
-      end
+
     end
   end
 end
