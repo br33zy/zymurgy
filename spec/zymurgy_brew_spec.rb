@@ -49,7 +49,7 @@ describe "Zymurgy" do
       end
 
       it "should set default values when parameters aren't provided" do
-        brew = Zymurgy::Brew.new(@brewery, {})
+        brew = Zymurgy::Brew.new(@brewery)
         brew.original_gravity.should == 1043
         brew.final_gravity.should == 1008
         brew.fermentation_volume_litres.should == 19

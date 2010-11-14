@@ -4,20 +4,20 @@ module Zymurgy
     attr_reader :brewery, :original_gravity, :final_gravity, :fermentation_volume_litres, :boil_time_minutes
     attr_writer :original_gravity, :final_gravity, :fermentation_volume_litres, :boil_time_minutes
 
-    DEFAULT_PARAMS = {
+    DEFAULT = {
         'original_gravity' => 1043,
         'final_gravity' => 1008,
         'fermentation_volume_litres' => 19,
         'boil_time_minutes' => 60
     }
     
-    def initialize brewery, params
+    def initialize brewery, params = {}
       raise ArgumentError unless (brewery.class == 'Zymurgy::Brewery')
       @brewery                      = brewery
-      @original_gravity             = params['original_gravity'] || DEFAULT_PARAMS['original_gravity']
-      @final_gravity                = params['final_gravity'] || DEFAULT_PARAMS['final_gravity']
-      @fermentation_volume_litres   = params['fermentation_volume_litres'] || DEFAULT_PARAMS['fermentation_volume_litres']
-      @boil_time_minutes            = params['boil_time_minutes'] || DEFAULT_PARAMS['boil_time_minutes']
+      @original_gravity             = params['original_gravity'] || DEFAULT['original_gravity']
+      @final_gravity                = params['final_gravity'] || DEFAULT['final_gravity']
+      @fermentation_volume_litres   = params['fermentation_volume_litres'] || DEFAULT['fermentation_volume_litres']
+      @boil_time_minutes            = params['boil_time_minutes'] || DEFAULT['boil_time_minutes']
     end
 
     # Mashout volume = Post Boil Volume + (Boil Time Minutes / 60) * evaporation_rate_litres_per_hour
