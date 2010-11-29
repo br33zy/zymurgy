@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{zymurgy}
-  s.version = "0.5.0"
+  s.version = "0.6.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Mike Breeze"]
-  s.date = %q{2010-11-14}
+  s.date = %q{2010-11-27}
   s.description = %q{(n) The branch of chemistry that deals with fermentation processes, as in brewing.
 
 Zymurgy is a collection of libraries to help with beer brewing calculations:
@@ -49,7 +49,10 @@ Zymurgy is a collection of libraries to help with beer brewing calculations:
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{A beer brewing gem}
   s.test_files = [
-    "spec/patches/float.rb",
+    "spec/acts_as_brew_recipe_spec.rb",
+     "spec/acts_as_brewery_spec.rb",
+     "spec/patches/float.rb",
+     "spec/schema.rb",
      "spec/spec_helper.rb",
      "spec/zymurgy_brew_spec.rb",
      "spec/zymurgy_brewery_spec.rb",
