@@ -4,10 +4,10 @@ require 'rubygems'
 require 'active_record'
 require "zymurgy/acts_as_brewery"
 require "zymurgy/acts_as_brew_recipe"
+require "zymurgy/acts_as_fermentable"
 
 module Zymurgy
 
-  autoload :Fermentable,   "zymurgy/fermentable"
   autoload :HopAddition,   "zymurgy/hop_addition"
   autoload :Utils,         "zymurgy/utils"
 

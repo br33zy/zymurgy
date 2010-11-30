@@ -22,17 +22,17 @@ ActiveRecord::Schema.define(:version => 0) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-#
-#  create_table "fermentables", :force => true do |t|
-#    t.string   "name"
-#    t.boolean  "mash"
-#    t.float    "points_per_kg_per_litre"
-#    t.float    "weight_in_kg"
-#    t.integer  "brew_id"
-#    t.datetime "created_at"
-#    t.datetime "updated_at"
-#  end
-#
+
+  create_table "fermentables", :force => true do |t|
+    t.string   "name"
+    t.boolean  "mash"
+    t.float    "points_per_kg_per_litre"
+    t.float    "weight_in_kg"
+    t.integer  "brew_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
 #  create_table "hop_additions", :force => true do |t|
 #    t.string   "name"
 #    t.float    "alpha_acid_percentage"

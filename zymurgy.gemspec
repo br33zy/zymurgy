@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{zymurgy}
-  s.version = "0.6.0"
+  s.version = "0.7.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Mike Breeze"]
-  s.date = %q{2010-11-27}
+  s.date = %q{2010-11-29}
   s.description = %q{(n) The branch of chemistry that deals with fermentation processes, as in brewing.
 
 Zymurgy is a collection of libraries to help with beer brewing calculations:
@@ -29,15 +29,17 @@ Zymurgy is a collection of libraries to help with beer brewing calculations:
      "Rakefile",
      "VERSION",
      "lib/zymurgy.rb",
-     "lib/zymurgy/brew.rb",
-     "lib/zymurgy/brewery.rb",
+     "lib/zymurgy/acts_as_brew_recipe.rb",
+     "lib/zymurgy/acts_as_brewery.rb",
      "lib/zymurgy/fermentable.rb",
      "lib/zymurgy/hop_addition.rb",
      "lib/zymurgy/utils.rb",
+     "spec/acts_as_brew_recipe_spec.rb",
+     "spec/acts_as_brewery_spec.rb",
+     "spec/database.yml",
      "spec/patches/float.rb",
+     "spec/schema.rb",
      "spec/spec_helper.rb",
-     "spec/zymurgy_brew_spec.rb",
-     "spec/zymurgy_brewery_spec.rb",
      "spec/zymurgy_fermentable_spec.rb",
      "spec/zymurgy_hop_addition_spec.rb",
      "spec/zymurgy_utils_spec.rb",
@@ -54,8 +56,6 @@ Zymurgy is a collection of libraries to help with beer brewing calculations:
      "spec/patches/float.rb",
      "spec/schema.rb",
      "spec/spec_helper.rb",
-     "spec/zymurgy_brew_spec.rb",
-     "spec/zymurgy_brewery_spec.rb",
      "spec/zymurgy_fermentable_spec.rb",
      "spec/zymurgy_hop_addition_spec.rb",
      "spec/zymurgy_utils_spec.rb"
