@@ -23,19 +23,19 @@ describe "Can act_as_brew_recipe" do
     belongs_to :brewery
 
     def evaporation_rate_litres_per_hour
-      @brewery.evaporation_rate_litres_per_hour
+      self.brewery.evaporation_rate_litres_per_hour
     end
 
     def mash_efficiency_percentage
-      @brewery.mash_efficiency_percentage
+      self.brewery.mash_efficiency_percentage
     end
 
     def volume_lost_to_mash_litres_per_kg
-      @brewery.volume_lost_to_mash_litres_per_kg
+      self.brewery.volume_lost_to_mash_litres_per_kg
     end
 
     def kettle_tax_litres
-      @brewery.kettle_tax_litres
+      self.brewery.kettle_tax_litres
     end    
   end
 

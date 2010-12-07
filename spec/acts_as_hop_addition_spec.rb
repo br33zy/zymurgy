@@ -5,15 +5,15 @@ describe "Confirm test schema is loaded correctly" do
     load_schema
   end
 
-  class Fermentable < ActiveRecord::Base
+  class HopAddition < ActiveRecord::Base
   end
 
   it "should load test schema correctly" do
-    Fermentable.all.should eql []
+    HopAddition.all.should eql []
   end
 end
 
-describe "Can act_as_fermentable" do
+describe "Can act_as_hop_addition" do
   before do
     load_schema
   end
@@ -62,7 +62,20 @@ describe "Can act_as_fermentable" do
     end
   end
 
-  describe "performing brew fermentable calculations" do
+  class HopAddition < ActiveRecord::Base
+    acts_as_hop_addition
+    belongs_to :brew
+
+    def post_boil_volume_litres
+      self.brew.post_boil_volume_litres
+    end
+
+    def original_gravity
+      self.brew.original_gravity
+    end
+  end
+
+  describe "performing hop addition calculations" do
     before do
       @fermentable = Fermentable.new()
       @fermentable.mash=(true)
@@ -81,43 +94,23 @@ describe "Can act_as_fermentable" do
       @brewery.volume_lost_to_mash_litres_per_kg=(0.82)
       @brewery.mash_efficiency_percentage=(61)
 
+      @hop_addition = HopAddition.new()
+      @hop_addition.alpha_acid_percentage=(7.0)
+      @hop_addition.weight_grams=(30)
+      @hop_addition.boil_time_minutes=(45)
+
       @brew.brewery=(@brewery)
 
       @fermentable.brew=(@brew)
+      @hop_addition.brew=(@brew)
     end
 
-    describe "for mashed fermentables, thus factoring in brewery mash efficiency" do
-      it "should calculate the gravity points contributed towards the post boil volume" do
-        @fermentable.post_boil_volume_gravity_points.round_dp(2).should == 35.52
-      end
-
-      it "should calculate the gravity points contributed towards the mash out/pre boil volume" do
-        @fermentable.pre_boil_volume_gravity_points.round_dp(2).should == 25.23
-      end
-
-      it "should calculate the gravity points contributed towards a given volume" do
-        @fermentable.volume_gravity_points(38).round_dp(2).should == 25.23
-      end
+    # mg/l AA        => ((AA/100) * weight_grams * 1000) / post_boil_volume
+    # time           => (1 - EXP((-0.04 * boil_time_minutes))) / 4.15
+    # IBU = mg/l AA   *    time      *      bigness factor
+    it "should calculate International Bitterness Units for the Hop Addition" do
+      @hop_addition.IBU().round_dp(2).should == 17.23
     end
 
-    describe "for fermentables (such as cans of goop) which aren't mashed, thus ignoring brewery mash efficiency" do
-      before do
-        @fermentable.mash=(false)
-        @fermentable.points_per_kg_per_litre=(300)
-        @fermentable.weight_in_kg=(1.7)
-      end
-
-      it "should calculate the gravity points contributed towards the post boil volume" do
-        @fermentable.post_boil_volume_gravity_points.round_dp(2).should == 18.89
-      end
-
-      it "should calculate the gravity points contributed towards the pre boil volume" do
-        @fermentable.pre_boil_volume_gravity_points.round_dp(2).should == 13.42
-      end
-
-      it "should calculate the gravity points contributed towards a given volume" do
-        @fermentable.volume_gravity_points(25).round_dp(2).should == 20.40
-      end
-    end
   end
 end
