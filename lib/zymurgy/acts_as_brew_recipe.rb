@@ -9,6 +9,7 @@ module Zymurgy
     end
   end
 
+  # TODO: Add hardening for when :send returns with null values.
   module InstanceMethods
 
     # bigness factor => 1.65*(0.000125^((original_gravity/1000)-1))
